@@ -52,6 +52,11 @@ This is the repository of the view server, which can be run by, e.g., an univers
 - DOI Citations
 	- More setup needed, change among others the [citation.js](./server/web/public/js/citation.js)
 
+### Hidden Endpoints
+- `{SERVER_PATH}/api`: http://127.0.0.1:8000/api
+- `{SERVER_PATH}/history`: http://127.0.0.1:8000/history
+- `{SERVER_PATH}/docs/core.html`: http://127.0.0.1:8000/docs/core.html [devmode only]
+
 ## About
 ### The View Server
 *CSMC-View-Server* by Magnus Bender, Florian Marwitz, Thomas Asselborn, Sylvia Melzer, 

@@ -75,6 +75,14 @@ class WebMain():
 				StaticFiles(directory=os.path.join(const.BASE_PATH, 'web', 'public')),
 				name="static"
 			)
+		
+		if const.DEVMODE:
+			# this makes docs accessible in dev-mode
+			self.app.mount(
+				"/docs",
+				StaticFiles(directory=os.path.join(const.BASE_PATH, 'docs')),
+				name="docs"
+			)
 
 		@self.app.exception_handler(StarletteHTTPException)
 		async def http_exception_handler(request, exc):
