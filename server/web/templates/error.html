@@ -1,0 +1,28 @@
+{#-
+CSMC File Server -- FastAPI implementation
+	(c) 2024 Magnus Bender, Florian Marwitz
+	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+	All rights reserved!
+-#}
+{% extends "csmc-base.html" %}
+{% block title %}Error{% endblock %}
+{% block maincontent %}
+	<h1>Error</h1>
+
+	<div class="message">
+		{% if url_valid %}
+		During the processing of <code>{{ fdr_file }}</code> an error occurred.
+		{% else %}
+		The url to the access the CSMC file in the FDR is invalid!
+		{% endif %}
+	</div>
+
+	<h3>Additional Error Messages</h3>
+	<ul>
+	{% for error_msg in error_messages %}
+		<li><code>{% if DEVMODE %}{{error_msg}}{% else %}{{error_msg.msg}}{% endif %}</code></li>
+	{% endfor %}
+	</ul>
+	
+{% endblock %}

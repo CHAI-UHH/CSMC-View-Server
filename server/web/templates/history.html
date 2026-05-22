@@ -1,0 +1,58 @@
+{% extends "csmc-base.html" %}
+{% block title %}History{% endblock %}
+{% block morehead %}
+<script>
+	function getLogsFromLocalStorage() {
+
+		if(!localStorage){
+			return [];
+		}
+
+		let logs = JSON.parse(localStorage.getItem('history')) || [];
+		logs.reverse();
+		return logs;
+	}
+
+	function renderLogs(logs) {
+		let history = document.getElementById('history');
+		history.innerHTML = '';
+		logs.forEach(log => {
+			// log is an object with keys title, url and timestamp
+			let li = document.createElement('li');
+			li.innerHTML = `<a href="${log.url}">${log.title}</a> <span>(${new Date(log.timestamp).toLocaleString()})</span> at <pre>${log.url}</pre>`;
+			history.appendChild(li);
+		});
+
+		if(logs.length === 0){
+			history.innerHTML = '<li>No history available</li>';
+		}
+	}
+
+	function clearHistory(){
+		if(localStorage){
+			localStorage.setItem('history', JSON.stringify([]));
+			location.reload();
+		}
+	}
+</script>
+{% endblock %}
+{% block maincontent %}
+	<h1>History</h1>
+		<p>
+			Here you can see the history of your visited viewers.
+			The history is stored locally in your browser and is not shared with anyone.
+			The list is capped at 20 entries.
+		</p>
+
+		<a href="#" class="button blue-button" onclick="clearHistory();">Clear History</a>
+
+	<h2>Visited Viewers</h2>
+	<ul id="history"></ul>
+{% endblock %}
+
+{% block morefoot %}
+	<script>
+		let logs = getLogsFromLocalStorage();
+		renderLogs(logs);
+	</script>
+{% endblock %}

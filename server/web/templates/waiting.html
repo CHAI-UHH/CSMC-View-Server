@@ -1,0 +1,29 @@
+{#-
+CSMC File Server -- FastAPI implementation
+	(c) 2024 Magnus Bender, Florian Marwitz
+	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+	All rights reserved!
+-#}
+{% extends "csmc-base.html" %}
+{% block title %}Please Wait{% endblock %}
+{% block maincontent %}
+	<h1>Please Wait</h1>
+
+	<div class="message">
+		Processing file: <code>{{ fdr_file }}</code>
+	</div>
+	<div class="spinner"></div>
+	<div class="message">
+		You will be redirected when processing is complete.
+		<br />
+		Otherwise click <a href="{{ view_link }}">here</a>.
+	</div>
+{% endblock %}
+{% block morefoot %}
+	<script>
+		setInterval(function() {
+			location.reload();
+		}, 2000);
+	</script>
+{% endblock %}

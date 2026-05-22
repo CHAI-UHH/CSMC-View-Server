@@ -1,0 +1,25 @@
+{#-
+CSMC File Server -- FastAPI implementation
+	(c) 2024 Magnus Bender
+	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+	All rights reserved!
+-#}
+<div class="csmc-branding" style="min-width: 635px; margin: 0 -20px; padding: 5px; padding-top: 50px; background: rgb(245,245,245); background: linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(255,255,255,1) 100%);">
+	<div class="csmc-branding-banner" style="position: absolute; top:0; left:0; background-color: #068be3; width: 100%; min-width: 635px; height: 45px; margin: 0; padding: 0;">
+		<a href="{{SERVER_PATH}}" style="text-transform:uppercase; font-family: sans-serif; font-size: 19px; line-height: 45px; font-weight: 600; color: white; text-decoration: none; padding-left: 20px;" target="_blank" rel="nofollow">CSMC-View-Server</a>
+		<ul style="float: right; line-height: 45px; padding: 0; margin: 0; padding-right: 5px;">
+			{% if is_viewer %}
+			<li style="list-style-type: none;display: inline-block;"><a style="text-decoration: none; font-family: sans-serif; font-size: 16px; color: white; line-height: 45px; padding-left: 10px;" target="_blank" href="{{SERVER_PATH}}">Home</a></li>
+			{% else %}
+			<li style="list-style-type: none;display: inline-block;"><a style="text-decoration: none; font-family: sans-serif; font-size: 16px; color: white; line-height: 45px; padding-left: 10px;" target="_blank" href="https://{{ALLOWED_HOSTNAMES_FIRST}}">Research Data Repository</a></li>
+			{% endif %}
+			<li style="list-style-type: none;display: inline-block;"><a style="text-decoration: none; font-family: sans-serif; font-size: 16px; color: white; line-height: 45px; padding-left: 10px;" target="_blank" href="https://github.com/CHAI-UHH/CSMC-View-Server">GitHub</a></li>
+		</ul>
+	</div>
+	<div class="csmc-branding-logos" style="position: relative; margin: 20px 0; height: 87.5px;">
+		<a href="https://www.chai.uni-hamburg.de/" target="_blank" rel="nofollow" title="Website of Institute for Humanities-Centered Artificial Intelligence">
+			<img src="{{SERVER_PATH}}/static/chai-logo.svg" title="Institute for Humanities-Centered Artificial Intelligence" alt="Logo of Institute for Humanities-Centered Artificial Intelligence" style="width: 270px; height: 87.5px; position: absolute; top: 0; left: 45px;">
+		</a>
+	</div>
+</div>

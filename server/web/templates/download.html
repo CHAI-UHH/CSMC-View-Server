@@ -1,0 +1,44 @@
+{#-
+CSMC File Server -- FastAPI implementation
+	(c) 2024 Magnus Bender, Florian Marwitz
+	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+	All rights reserved!
+-#}
+{% extends "csmc-base.html" %}
+{% block title %}Download{% endblock %}
+{% block maincontent %}
+	<h1>File Processing Complete</h1>
+      	<div class="file-icon">📁</div>
+      	<p>
+			Your file has been processed and the download of the extracted data will start automatically.
+			You can also use the buttons below to download or view the file manually.
+		</p>
+		<a href="{{SERVER_PATH}}/view/{{ fdr_file }}/data.zip" class="button download-button">Extract Data</a>
+		<a href="{{SERVER_PATH}}/view/{{ fdr_file }}/index.html" class="button view-button">View Data</a>
+		
+		{% if raw_info|length > 0 %}
+		<p>
+			<b>Data contents of the csmc file:</b>
+			<details>
+				<ul>
+					{% for file in raw_info %}
+					<li><code>{{ file }}</code></li>
+					{% endfor %}
+				</ul>
+			</details>
+		</p>
+		{% endif %}
+{% endblock %}
+{% block morefoot %}
+	<script>
+		window.onload = function() {
+			var downloadLink = document.createElement('a');
+			downloadLink.href = "{{SERVER_PATH}}/view/{{ fdr_file }}/data.zip";
+			downloadLink.download = "{{ fdr_file[fdr_file.rfind('/')+1:] }}.zip";
+			document.body.appendChild(downloadLink);
+			downloadLink.click();
+			document.body.removeChild(downloadLink);
+		};
+	</script>
+{% endblock %}

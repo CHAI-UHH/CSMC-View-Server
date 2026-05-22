@@ -1,0 +1,17 @@
+{% extends "csmc-base.html" %}
+{% block title %}Error{% endblock %}
+{% block maincontent %}
+
+	<div class="alert alert-danger">
+		<h1>Error</h1>
+
+		<div class="message">
+			{{ message }}
+		</div>
+
+		{% if DEVMODE %}
+			<h3>Additional Information</h3>
+			<code>{{ additional }}</code>
+		{% endif %}
+	</div>
+{% endblock %}

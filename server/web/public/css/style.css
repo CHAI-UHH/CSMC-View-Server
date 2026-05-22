@@ -1,0 +1,158 @@
+/*
+# CSMC File Server -- FastAPI implementation
+# 	(c) 2024 Magnus Bender, Florian Marwitz
+# 	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+# 		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+# 	All rights reserved!
+*/
+
+body {
+	font-family: sans-serif;
+	background-color: white;
+	margin: 0;
+	padding: 20px;
+	text-align: left;
+}
+h1 {
+	color: #333;
+	margin-top: 0;
+}
+
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 5px 5px 0 0;
+	padding: 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+    padding: 50px 20px 6px 20px;
+    font-size: 14px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.footer ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+    overflow: hidden;
+}
+
+.footer ul li {
+    display: inline-block;
+}
+
+.footer ul li a {
+    position: relative;
+    padding-left: 12px;
+    margin-left: 20px;
+    color: #4e4e4e;
+    cursor: pointer;
+    display: inline;
+    vertical-align: middle;
+    text-decoration: none !important;
+    font-weight: bold;
+}
+
+.footer ul li a::before {
+    display: block;
+    content: "" !important;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 6px;
+    height: 6px;
+    border: 2px solid #4e4e4e;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-width: 2px 2px 0 0;
+    transform: rotate(45deg) scale(.8) translate3d(-1px,1px,0);
+}
+
+.message {
+	margin-top: 30px;
+	font-size: 18px;
+	text-align: center;
+}
+.file-icon {
+	font-size: 48px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	margin: 10px;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+.download-button, .blue-button {
+	background-color: #068be3;;
+} 
+.view-button {
+	background-color: #ddf40b;
+} 
+.button:hover {
+	opacity: 0.8;
+}
+
+.spinner {
+	width: 80px;
+	height: 80px;
+	border: 6px solid #f3f3f3;
+	border-top: 6px solid #068be3;
+	border-radius: 50%;
+	animation: spin 2s linear infinite;
+	margin: 50px auto;
+}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@media screen and (max-width: 600px) {
+	.spinner {
+		width: 60px;
+		height: 60px;
+		border-width: 4px;
+	}
+	.message {
+		font-size: 16px;
+	}
+}
+
+div.csmc-branding a:hover {
+	text-decoration: underline !important;
+}
+
+/* Inspired by Bootstrap -- https://getbootstrap.com/ */
+.alert{
+	position: relative;
+	padding: .75rem 1.25rem;
+	margin-bottom: 1rem;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+}
+.alert-danger {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+}
+.alert-success {
+	color: #155724;
+	background-color: #d4edda;
+	border-color: #c3e6cb;
+}
+.alert-heading {
+	color: inherit;
+}

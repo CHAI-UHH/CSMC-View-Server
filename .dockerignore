@@ -1,0 +1,7 @@
+.venv/
+.git/
+
+/server/data/
+/server/web/public/local-app/
+
+__pycache__

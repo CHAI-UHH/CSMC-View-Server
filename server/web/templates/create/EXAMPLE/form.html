@@ -1,0 +1,175 @@
+{% extends "csmc-base.html" %}
+{% block title %}EXAMPLE CSMC Creator{% endblock %}
+{% block morehead %}
+<style>
+	/* Style for forms */
+	form .form-group {
+		margin-bottom: 20px;
+	}
+
+	form label {
+		display: block;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	form input[type="text"],
+	form select {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+
+	form input[type="file"] {
+		margin-top: 5px;
+	}
+
+	form button[type="submit"] {
+		background-color: #1bb300; 
+		color: #fff;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	form button[type="submit"]:hover {
+		background-color: #91ff00;
+	}
+
+	/* Style for upload progress */
+
+	.smallspinner {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #f3f3f3;
+		border-top: 2px solid #1bb300;
+		border-radius: 50%;
+		animation: smallspin 1s linear infinite;
+		margin-right: 10px;
+	}
+	
+	@keyframes smallspin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.current-step, #error {
+		margin-top: 20px;
+	}
+
+	.current-step {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+		color: #1bb300;
+	}
+
+	.progress-bar {
+		width: 100%;
+		background-color: #f3f3f3;
+		border-radius: 5px;
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	
+	.progress {
+		width: 0%;
+		height: 20px;
+		background-color: #1bb300;
+		border-radius: 5px;
+		transition: width 0.5s ease;
+	}
+</style>
+{% endblock %}
+{% block maincontent %}
+    <h1>EXAMPLE CSMC Creator</h1>
+        <p>
+            This form allows you to create a CSMC file for the EXAMPLE project. 
+			Please select the files you want to upload.
+			<!-- You can upload multiple files at once. -->
+			At the moment, only one csv file is supported.
+			The files must obey the conventions of the EXAMPLE project.
+        </p>
+
+	  	<h3>EXAMPLE Data</h3>
+	  	Use a simple CSV with the following content:
+		<pre>
+ID,Name
+1,Example 1
+2,Example 2
+3,Example 3
+4,Example 4
+		</pre>
+
+		<form id="uploadForm" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="id_files">Select files to upload:</label>
+                <input type="file" name="files" id="files" multiple required>
+            </div>
+            <button type="submit">Create CSMC File</button>
+        </form>
+
+		<div id="upload-progress" style="display:none">
+			<div class="current-step">
+				<div class="smallspinner"></div> Uploading files...
+			</div>
+			<div class="progress-bar">
+				<div id="upload-progress-width" class="progress"></div>
+			</div>
+		</div>
+
+		<div id="error" class="alert alert-danger" style="display:none">
+			<h3>Error</h3>
+			<div class="message">Something went wrong. Please try again.</div>
+		</div>
+{% endblock %}
+{%block morefoot %}
+<script>
+
+	document.getElementById('uploadForm').addEventListener('submit', function(event) {
+		event.preventDefault();
+
+		const files = document.getElementById('files').files;
+		//const firstname = document.getElementById('firstname').value;
+		//const lastname = document.getElementById('lastname').value;
+
+		const formData = new FormData();
+		for (let i = 0; i < files.length; i++) {
+			formData.append('files', files[i]);
+		}
+		//formData.append('firstname', firstname);
+		//formData.append('lastname', lastname);
+
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', '/create/EXAMPLE', true);
+
+		xhr.upload.onprogress = function(event) {
+			console.log("onprogress", event);
+			if (event.lengthComputable) {
+				const percentComplete = (event.loaded / event.total) * 100;
+				const progressBarFill = document.getElementById('upload-progress-width');
+				progressBarFill.style.width = percentComplete + '%';
+			}
+		};
+
+		xhr.onload = function() {
+			console.log("onload", xhr);
+			if (xhr.status == 200 || xhr.status === 303) {
+				// Follow the redirect to the unique URL returned by the server
+				const redirectUrl = xhr.responseURL;
+				window.location.href = redirectUrl;
+			} else {
+				document.getElementById('upload-progress').style.display = 'none';
+				document.getElementById('error').style.display = 'block';
+			}
+		};
+
+		document.getElementById('upload-progress').style.display = 'block';
+		xhr.send(formData);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+requests
+pdoc
+fastapi
+uvicorn[standard]
+python-multipart
+uuid
+lxml
+pandas
+mistune
+packaging

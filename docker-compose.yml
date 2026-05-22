@@ -1,0 +1,24 @@
+services:
+  app:
+    container_name: csmc-view-server
+    build:
+      context: .
+      args:
+        - H_GID=1050
+        - H_UID=1050
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+    volumes:
+      # bind mount data and local app directories
+      #   change the local (first) part based in your needs
+      - ./server/data/:/home/user/server/data/
+      - ./server/web/public/local-app/:/home/user/server/web/public/local-app/:ro
+    environment:
+      - SERVER_PATH=http://localhost:8000
+      - ALLOWED_HOSTNAMES=rdr.example.com,rde-staging.example.com
+      #- DEVMODE=false
+      #- IMPRINT_URL=
+      #- PRIVACY_POLICY_URL=
+      #- CONTACT_NAME=
+      #- CONTACT_MAIL=

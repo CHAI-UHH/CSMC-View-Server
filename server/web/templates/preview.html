@@ -1,0 +1,147 @@
+{% extends "csmc-base.html" %}
+{% block title %}Server Preview{% endblock %}
+{% block morehead %}
+<style>
+	/* Style for forms */
+
+	form label {
+		display: block;
+		font-weight: bold;
+		margin-bottom: 5px;
+	}
+
+	.button {
+		background-color: #068be3;
+		color: #fff;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.button:hover {
+		background-color: #066eb4;
+	}
+
+	/* Style for upload progress */
+
+	.smallspinner {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #f3f3f3;
+		border-top: 2px solid #068be3;
+		border-radius: 50%;
+		animation: smallspin 1s linear infinite;
+		margin-right: 10px;
+	}
+	
+	@keyframes smallspin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.current-step, #error {
+		margin-top: 20px;
+	}
+
+	.current-step {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+		color: #068be3;
+	}
+
+	.progress-bar {
+		width: 100%;
+		background-color: #f3f3f3;
+		border-radius: 5px;
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	
+	.progress {
+		width: 0%;
+		height: 20px;
+		background-color: #068be3;
+		border-radius: 5px;
+		transition: width 0.5s ease;
+	}
+</style>
+{% endblock %}
+{% block maincontent %}
+    <h1>Preview Local CSMC Files</h1>
+        <p>
+            This form allows you to upload a CSMC file from your computer to our server to preview the content of the file.
+			Please note that the preview is only temporary and the file will be deleted after a few days.
+			However, you may use this tool to check the content of a CSMC file before uploading it to the <a href="https://{{ALLOWED_HOSTNAMES_FIRST}}">Research Data Repository</a>.
+			You can share the link obtained when uploading the file with others to show them the content of the CSMC file.
+        </p>
+
+		<form>
+			<input id="file" type="file" accept=".csmc" hidden>
+			<label for="file" class="button">Choose File</label>
+		</form>
+
+		<div id="upload-progress" style="display:none">
+			<div class="current-step">
+				<div class="smallspinner"></div> Uploading files...
+			</div>
+			<div class="progress-bar">
+				<div id="upload-progress-width" class="progress"></div>
+			</div>
+		</div>
+
+		<div id="error" class="alert alert-danger" style="display:none">
+			<h3>Error</h3>
+			<div class="message">Something went wrong. Please try again.</div>
+		</div>
+{% endblock %}
+{%block morefoot %}
+<script>
+
+	document.getElementById('file').addEventListener('change', function(event) {
+		event.preventDefault();
+
+		const files = document.getElementById('file').files;
+
+		// should only be one file
+		if (files.length !== 1) {
+			document.getElementById('error').style.display = 'block';
+			return;
+		}
+
+		const formData = new FormData();
+		for (let i = 0; i < files.length; i++) {
+			formData.append('files', files[i]);
+		}
+
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', '/preview', true);
+
+		xhr.upload.onprogress = function(event) {
+			console.log("onprogress", event);
+			if (event.lengthComputable) {
+				const percentComplete = (event.loaded / event.total) * 100;
+				const progressBarFill = document.getElementById('upload-progress-width');
+				progressBarFill.style.width = percentComplete + '%';
+			}
+		};
+
+		xhr.onload = function() {
+			console.log("onload", xhr);
+			if (xhr.status == 200 || xhr.status === 303) {
+				// Follow the redirect to the unique URL returned by the server
+				const redirectUrl = xhr.responseURL;
+				window.location.href = redirectUrl;
+			} else {
+				document.getElementById('upload-progress').style.display = 'none';
+				document.getElementById('error').style.display = 'block';
+			}
+		};
+
+		document.getElementById('upload-progress').style.display = 'block';
+		xhr.send(formData);
+});
+</script>
+{% endblock %}

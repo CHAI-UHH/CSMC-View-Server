@@ -1,0 +1,51 @@
+{#-
+CSMC File Server -- FastAPI implementation
+	(c) 2024 Magnus Bender
+	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+	All rights reserved!
+-#}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>{{title_prefix}}{% block title %}{% endblock %} &dash; CSMC Viewer</title>
+
+		<link rel="shortcut icon" href="{{SERVER_PATH}}/static/favicon.ico" type="image/x-icon; charset=binary" />
+		<link rel="icon" href="{{SERVER_PATH}}/static/favicon.ico" type="image/x-icon; charset=binary" />
+
+		<link rel="stylesheet" href="{{SERVER_PATH}}/static/css/font.css?{{VERSION}}" />
+		<link rel="stylesheet" href="{{SERVER_PATH}}/static/css/style.css?{{VERSION}}" /> 
+		
+		{% block morehead %}
+		{% endblock %}
+	</head>
+	<body>
+		{% include "csmc-branding.html" %}
+		<div class="container">
+			{% if request.state.error %}
+				<div class="alert alert-danger" role="alert">
+					<h4 class="alert-heading">Error</h4>
+					{% if request.state.error_safe %}
+						{{request.state.error|safe}} 
+					{% else %}
+						{{request.state.error}} 
+					{% endif %}
+				</div>
+			{% elif request.state.success %} 
+				<div class="alert alert-success" role="alert">
+					<h4 class="alert-heading">Success</h4>
+					{{request.state.success}}
+				</div>
+			{% endif %}
+			
+			{% block maincontent %}
+			{% endblock %}
+		</div>
+		{% include "csmc-footer.html" %}
+		{% block morefoot %}
+		{% endblock %}
+	</body>
+</html>

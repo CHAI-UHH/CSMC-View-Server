@@ -1,0 +1,108 @@
+{#-
+CSMC File Server -- FastAPI implementation
+	(c) 2024 Magnus Bender, Florian Marwitz
+	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
+		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
+	All rights reserved!
+-#}
+{% extends "csmc-base.html" %}
+{% block title %}About{% endblock %}
+{% block maincontent %}
+	<h1>Welcome to the CSMC Webserver</h1>
+		<div class="file-icon">📁</div>
+		
+		<h2>Introduction to CSMC Files</h2>
+			<p>
+				CSMC (Computer Science Metadata Container) is a newly invented file type designed to store raw research data alongside metadata and a viewer for easy access and visualization. The CSMC file format aims to facilitate the sharing and preservation of research data in a self-contained and user-friendly manner.
+			</p>
+		
+		<h2>Goals and Functionality</h2>
+			<p>
+				The primary goal of CSMC files is to provide a convenient and efficient way for scholars in the humanities to store, share, and access their research data. By combining the raw data, metadata, and a viewer within a single file, CSMC files offer a streamlined approach to data management and collaboration.
+			</p>
+			<p>
+				Key features of CSMC files include:
+			</p>
+			<ul>
+				<li>Storage of raw research data</li>
+				<li>Inclusion of metadata to describe and contextualize the data</li>
+				<li>Embedded viewer for easy visualization and exploration of the data</li>
+			</ul>
+		
+			<p>
+				You can also view the <a href="/specification">CSMC Specification</a> for more detailed information on the structure and content of CSMC files.
+			</p>
+
+		<h2>CSMC Webserver</h2>
+			<p>
+				The CSMC Webserver is a platform that enables scholars to view and download CSMC files. It utilizes the Database on Demand approach, allowing for efficient storage and retrieval of CSMC files.
+			</p>
+			<p>
+				The CSMC files are uploaded to the FDR (Forschungsdatenrepositorium) of the University of Hamburg. The FDR provides buttons for viewing and downloading CSMC files:
+			</p>
+			<ul>
+				<li>Viewing: The embedded viewer within the CSMC file is displayed, allowing users to explore and visualize the research data.</li>
+				<li>Downloading: A zip archive containing the research data and metadata is served, omitting the viewer for a lightweight download.</li>
+				<li>Creation: A csmc file is created for the raw resource files provided from a project.</li>
+			</ul>
+			<p>				
+				CSMC files to be used with this webserver have to follow the <a href="/specification">CSMC Specification</a>.
+			</p>
+
+			<h3>Preview of CSMC Files</h3>
+				<p>You can go to our preview page to upload a file from your computer for temporary previewing.</p>
+				<a href="{{SERVER_PATH}}/preview" class="button blue-button">Preview</a>
+
+			<h3>CSMC File Creation</h3>
+				<p>
+					This webserver provides the automatical creation of csmc files for the following projects or applications:
+				</p>
+
+				<h4>EXAMPLE</h4>
+				<p>
+					You can create a CSMC file for the EXAMPLE project by providing csv files.
+					The CSMC file will contain a viewer for the processed files.
+				</p>
+				<a href="{{SERVER_PATH}}/create/EXAMPLE" class="button blue-button">Create EXAMPLE CSMC File</a>
+
+		<h2>Local Applications</h2>
+			<p>
+				We also provide local applications for Windows and MacOS for viewing CSMC files directly on your local computer.
+				After installation, you can double-click on a CSMC file to open it in the viewer application.
+				Moreover, you can also drag and drop CSMC files onto the application icon to open them or open them from within the application.
+			</p>
+			<ul>
+				<li>
+					<a href="{{SERVER_PATH}}/local-app/windows-latest">Download for Windows</a>
+				</li>
+				<li>
+					<a href="{{SERVER_PATH}}/local-app/macos-latest">Download for MacOS (Apple Silicon)</a>,
+					<a href="{{SERVER_PATH}}/local-app/macos-intel-latest">MacOS (Intel)</a>	
+					<p>
+						Please note that for MacOS you have to run <code>xattr -c [path/to/app]</code> once to mark the application as safe to run.
+						You have to replace <code>[path/to/app]</code> by the path to the installed application.
+					</p>
+				</li>
+				<li>
+					<a href="{{SERVER_PATH}}/local-app/linux-latest">Download for Linux</a>
+				</li>
+			</ul>
+		
+		<h2>Assistance and Support</h2>
+			<p>
+				If you have any questions or need assistance regarding CSMC files or the CSMC Webserver, please feel free to contact:
+			</p>
+			<p>
+				{{CONTACT_NAME}}<br>
+				Email: <a href="mailto:{{CONTACT_MAIL}}">{{CONTACT_MAIL}}</a>
+			</p>
+
+		<h2>Additional Hints</h2>
+		<p>
+			<b>Hints on Privacy Policy and OpenStreetMap</b>
+			<details>
+				Some viewers need to display maps, which are served by OpenStreetMap. For loading the tiles, the current time and IP adress are sent to OpenStreetMap.
+				This processing of data is lawful pursuant to Article 6 paragraph 1 lit. f GDPR and is in the legitimate interest of providing the most convenient use of these viewers.
+			</details>
+		</p>
+{% endblock %}

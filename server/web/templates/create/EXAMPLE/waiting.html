@@ -1,0 +1,98 @@
+{% extends "csmc-base.html" %}
+{% block title %}Wait for EXAMPLE CSMC Creation{% endblock %}
+{% block morehead %}
+<style>
+	.smallspinner {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 2px solid #f3f3f3;
+		border-top: 2px solid #1bb300;
+		border-radius: 50%;
+		animation: smallspin 1s linear infinite;
+		margin-right: 10px;
+	}
+	
+	@keyframes smallspin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+	
+	.progress-bar {
+		width: 100%;
+		background-color: #f3f3f3;
+		border-radius: 5px;
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
+	
+	.progress {
+		width: {{ progress }}%;
+		height: 20px;
+		background-color: #1bb300;
+		border-radius: 5px;
+		transition: width 0.5s ease;
+	}
+	
+	.step {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+	
+	.step.completed {
+		color: #4CAF50;
+	}
+	
+	.step.current {
+		color: #c9cd02;
+	}
+	
+	.step.pending {
+		color: #999;
+	}
+	
+	.checkmark {
+		display: inline-block;
+		margin-right: 10px;
+	}
+</style>
+{% endblock %}
+{% block maincontent %}
+<h1>Creating your CSMC file</h1>
+<p class="message">Please wait while your files are being processed.</p>
+
+<div class="steps">
+	<div class="step {% if step > 1 %}completed{% elif step == 1 %}current{% else %}pending{% endif %}">
+		{% if step > 1 %}<span class="checkmark">✅</span>{% elif step == 1 %}<div class="smallspinner"></div>{% endif %}
+		Parsing files and configurating viewer
+	</div>
+	{% if step == 1 %}
+	<div class="progress-bar">
+		<div class="progress"></div>
+	</div>
+	{% endif %}
+
+	<div class="step {% if step > 2 %}completed{% elif step == 2 %}current{% else %}pending{% endif %}">
+		{% if step > 2 %}<span class="checkmark">✅</span>{% elif step == 2 %}<div class="smallspinner"></div>{% endif %}
+		Adding viewer
+	</div>
+	
+	<div class="step {% if step > 3 %}completed{% elif step == 3 %}current{% else %}pending{% endif %}">
+		{% if step > 3 %}<span class="checkmark">✅</span>{% elif step == 3 %}<div class="smallspinner"></div>{% endif %}
+		Creating csmc file
+	</div>
+	{% if step == 3 %}
+	<div class="progress-bar">
+		<div class="progress"></div>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}
+{% block morefoot %}
+	<script>
+		setInterval(function() {
+			location.reload();
+		}, 5000);
+	</script>
+{% endblock %}

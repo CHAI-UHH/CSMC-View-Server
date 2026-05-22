@@ -1,0 +1,13 @@
+{% extends "csmc-base.html" %}
+{% block title %}CSMC Specification{% endblock %}
+{% block morehead %}
+	<link rel="stylesheet" href="{{SERVER_PATH}}/static/css/prism.css?{{VERSION}}" />
+	<script src="{{SERVER_PATH}}/static/js/prism.js?{{VERSION}}"></script>
+{% endblock %}
+{% block maincontent %}
+	{{ content | safe }}
+
+	<p>
+		<a download href="/static/specification.md" class="button blue-button">Download Specification</a>
+	</p>
+{% endblock %}
