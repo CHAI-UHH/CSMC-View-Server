@@ -2,7 +2,8 @@
 # 	(c) 2024 Magnus Bender
 # 	Institute of Humanities-Centered Artificial Intelligence (CHAI), Universitaet Hamburg
 # 		https://www.philosophie.uni-hamburg.de/chai/personen/bender.html
-# 	All rights reserved!
+# 	released under the terms of GNU Public License Version 3
+#     https://www.gnu.org/licenses/gpl-3.0.txt
 
 import os
 from io import StringIO
