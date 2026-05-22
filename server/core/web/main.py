@@ -80,7 +80,7 @@ class WebMain():
 			# this makes docs accessible in dev-mode
 			self.app.mount(
 				"/docs",
-				StaticFiles(directory=os.path.join(const.BASE_PATH, 'docs')),
+				StaticFiles(directory=os.path.join(const.BASE_PATH, '..', 'docs')),
 				name="docs"
 			)
 

@@ -9,7 +9,7 @@
 This is the repository of the view server, which can be run by, e.g., an university to together with a research data repository for hosting CSMC files.
 
 - For bundling data with a viewer in CSMC files, see the [Generic Viewer](https://github.com/CHAI-UHH/Generic-CSMC-Viewer).
-- There is also the [CMSCGen CLI]https://github.com/CHAI-UHH/Generic-CSMC-Viewer/blob/main/python/Readme.md) which provides an easy way to create a CSMC file by providing CSV files.
+- There is also the [CMSCGen CLI](https://github.com/CHAI-UHH/Generic-CSMC-Viewer/blob/main/python/Readme.md) which provides an easy way to create a CSMC file by providing CSV files.
 	In addition, *CSMCGen CLI* provides a local preview for CSMC files. 
 	This preview can also be used while working or developing viewers.
 
@@ -25,7 +25,7 @@ This is the repository of the view server, which can be run by, e.g., an univers
 - Run (in folder `./server`!!)
 	- `DEVMODE=true fastapi dev core/web/main.py` [development server]
 	- `python -m core` [CLI interface]
-	- `pdoc --output-directory ./docs --no-browser --docformat google core` [update docs]
+	- `pdoc --output-directory ./../docs --no-browser --docformat google core` [update docs, or [here](https://chai-uhh.github.io/CSMC-View-Server/)]
 
 ### Docker
 - `docker compose build`
