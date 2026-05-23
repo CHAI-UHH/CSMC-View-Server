@@ -6,7 +6,7 @@
 - Research Data Repository of University of Hamburg: <https://www.fdr.uni-hamburg.de/>
 
 ## Create a CSMC file
-This is the repository of the view server, which can be run by, e.g., an university to together with a research data repository for hosting CSMC files.
+This is the repository of the view server, which can be run by, e.g., an university together with a research data repository for hosting CSMC files.
 
 - For bundling data with a viewer in CSMC files, see the [Generic Viewer](https://github.com/CHAI-UHH/Generic-CSMC-Viewer).
 - There is also the [CMSCGen CLI](https://github.com/CHAI-UHH/Generic-CSMC-Viewer/blob/main/python/Readme.md) which provides an easy way to create a CSMC file by providing CSV files.
@@ -68,7 +68,7 @@ University of Hamburg, <https://www.chai.uni-hamburg.de/>,
 ### CSMC Files
 - A general introduction into CSMC files for data management: 
       [Dataset Provision and Citation in the Digital Age](https://www.philosophie.uni-hamburg.de/chai/forschung/research-data-management.html)
-- Different demos using CSMC files and viewers while being integrated in a rResearch Data Repository (RDR):
+- Different demos using CSMC files and viewers while being integrated in a Research Data Repository (RDR):
       [Demos](https://www.philosophie.uni-hamburg.de/chai/demos.html)
 - [View-Server at University of Hamburg](https://csmc-view.chai.uni-hamburg.de/)
 - [RDR of University of Hamburg](https://www.fdr.uni-hamburg.de/search?page=1&size=20&file_type=csmc)
